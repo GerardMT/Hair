@@ -5,7 +5,10 @@
 #include "force_field_drag.h"
 #include "force_field_gravity.h"
 #include "object.h"
-#include "particle_system.h"
+#include "particle_hair_initializer_curly.h"
+#include "particle_hair_initializer_single.h"
+#include "particle_system_emitter.h"
+#include "particle_system_hair.h"
 #include "solver.h"
 
 #include <GL/glew.h>
@@ -49,11 +52,10 @@ private:
     Solver *solver_semi_implicit_euler_;
     Solver *solver_verlet_;
 
-    ParticleInitializer *particle_initializer_fountain_;
-    ParticleInitializer *particle_initializer_waterfall_;
-    ParticleInitializer *particle_initializer_semi_sphere_;
+    ParticleSystemHair *particles_system_hair;
 
-    ParticleSystem *particles_system_;
+    ParticleHairInitializerSingle *particle_hair_initializer_single_;
+    ParticleHairInitializerCurly *particle_hair_initializer_curly_;
 
     ForceFieldGravity *force_field_gravity_;
     ForceFieldDrag *force_field_drag_;
@@ -83,15 +85,13 @@ private slots:
 
     void uiSolverVerlet(bool v);
 
-    void uiParticleInitializerFountain(bool v);
+    void uiPaintParticles(bool v);
 
-    void uiParticleInitializerWatterfall(bool v);
+    void uiPaintPath(bool v);
 
-    void uiParticleInitializerSemiSphere(bool v);
+    void uiInitializerRope(bool v);
 
-    void uiNParticles(int n);
-
-    void uiLifetime(double t);
+    void uiInitializerCurly(bool v);
 };
 
 #endif  //  GLWIDGET_H_

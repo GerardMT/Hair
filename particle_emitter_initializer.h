@@ -3,10 +3,10 @@
 
 #include "particle.h"
 
-class ParticleInitializer
+class ParticleEmitterInitializer
 {
 public:
-    virtual ~ParticleInitializer() {};
+    virtual ~ParticleEmitterInitializer() {};
 
     virtual void initialize(float dt, Particle &p) = 0;
 };

@@ -1,14 +1,16 @@
-#include "particle_initializer_waterfall.h"
+#include "particle_emitter_initializer_waterfall.h"
 
-ParticleInitializerWaterfall::ParticleInitializerWaterfall(glm::vec3 pos, float speed, float spread)
+ParticleEmitterInitializerWaterfall::ParticleEmitterInitializerWaterfall(glm::vec3 pos, float speed, float spread)
 {
     pos_ = pos;
     speed_ = speed;
     spread_ = spread;
 }
 
-void ParticleInitializerWaterfall::initialize(float dt, Particle &p)
+void ParticleEmitterInitializerWaterfall::initialize(float dt, Particle &p)
 {
+    p.fixed_ = false;
+
     p.pos_pre_ = pos_;
 
     float i = M_PI / 2.0 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (M_PI / 2.0 * spread_)));

@@ -30,16 +30,20 @@ SOURCES += \
     collider_triangle.cpp \
     force_field_drag.cpp \
     force_field_gravity.cpp \
+    force_spring.cpp \
     main.cc \
     main_window.cc \
     glwidget.cc \
     mesh.cpp \
     object.cpp \
     particle.cpp \
-    particle_initializer_fountain.cpp \
-    particle_initializer_semi_sphere.cpp \
-    particle_initializer_waterfall.cpp \
-    particle_system.cpp \
+    particle_emitter_initializer_fountain.cpp \
+    particle_emitter_initializer_semi_sphere.cpp \
+    particle_emitter_initializer_waterfall.cpp \
+    particle_hair_initializer_curly.cpp \
+    particle_hair_initializer_single.cpp \
+    particle_system_emitter.cpp \
+    particle_system_hair.cpp \
     solver_euler.cpp \
     solver_semi_implicit_euler.cpp \
     solver_verlet.cpp \
@@ -53,20 +57,26 @@ HEADERS  += \
     collider_polygon.h \
     collider_sphere.h \
     collider_triangle.h \
+    force.h \
     force_field.h \
     force_field_drag.h \
     force_field_gravity.h \
+    force_spring.h \
     main_window.h \
     glwidget.h \
     mesh.h \
     object.h \
     paint_gl.h \
     particle.h \
-    particle_initializer.h \
-    particle_initializer_fountain.h \
-    particle_initializer_semi_sphere.h \
-    particle_initializer_waterfall.h \
-    particle_system.h \
+    particle_emitter_initializer.h \
+    particle_emitter_initializer_fountain.h \
+    particle_emitter_initializer_semi_sphere.h \
+    particle_emitter_initializer_waterfall.h \
+    particle_hair_initializer.h \
+    particle_hair_initializer_curly.h \
+    particle_hair_initializer_single.h \
+    particle_system_emitter.h \
+    particle_system_hair.h \
     solver.h \
     solver_euler.h \
     solver_semi_implicit_euler.h \
@@ -78,8 +88,9 @@ FORMS    += \
 
 RESOURCES += \
     shader/particle.frag \
-    shader/particle.vert
-
-DISTFILES += \
+    shader/particle.vert \
     shader/object.frag \
-    shader/object.vert
+    shader/object.vert \
+    shader/path.frag \
+    shader/path.vert
+

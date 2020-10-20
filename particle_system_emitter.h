@@ -1,8 +1,7 @@
-#ifndef PARTICLESSYSTEM_H
-#define PARTICLESSYSTEM_H
+#ifndef PARTICLESSYSTEMEMITTER_H
+#define PARTICLESSYSTEMEMITTER_H
 
 #include <GL/glew.h>
-#include <glm/gtc/type_ptr.hpp>
 #include <QOpenGLShaderProgram>
 #include <vector>
 
@@ -10,15 +9,17 @@
 #include "force_field.h"
 #include "paint_gl.h"
 #include "particle.h"
-#include "particle_initializer.h"
+#include "particle_emitter_initializer.h"
 #include "solver.h"
 
 using namespace std;
 
-class ParticleSystem : public PaintGL
+class ParticleSystemEmitter : public PaintGL
 {
 public:
-    ParticleSystem(Solver &s, ParticleInitializer &i, unsigned int n, float life_time_);
+    ParticleSystemEmitter(Solver &s, ParticleEmitterInitializer &i, unsigned int n, float life_time_);
+
+    ~ParticleSystemEmitter();
 
     void nParticles(unsigned int n);
 
@@ -28,7 +29,7 @@ public:
 
     void solver(Solver &s);
 
-    void particleInitializer(ParticleInitializer &i);
+    void particleInitializer(ParticleEmitterInitializer &i);
 
     void initialieGL() override;
 
@@ -43,7 +44,7 @@ private:
     vector<ForceField *> force_fields_;
     vector<Collider *> collliders_;
 
-    ParticleInitializer *initializer_;
+    ParticleEmitterInitializer *initializer_;
 
     QOpenGLShaderProgram program_;
 
@@ -53,4 +54,4 @@ private:
     GLuint cdbo_;
 };
 
-#endif // PARTICLESSYSTEM_H
+#endif // PARTICLESSYSTEMEMITTER_H

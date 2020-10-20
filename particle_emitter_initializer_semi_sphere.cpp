@@ -1,14 +1,16 @@
-#include "particle_initializer_semi_sphere.h"
+#include "particle_emitter_initializer_semi_sphere.h"
 
-ParticleInitializerSemiSphere::ParticleInitializerSemiSphere(glm::vec3 pos, float speed, float radius)
+ParticleEmitterInitializerSemiSphere::ParticleEmitterInitializerSemiSphere(glm::vec3 pos, float speed, float radius)
 {
     pos_ = pos;
     speed_ = speed;
     radius_ = radius;
 }
 
-void ParticleInitializerSemiSphere::initialize(float dt, Particle &p)
-{
+void ParticleEmitterInitializerSemiSphere::initialize(float dt, Particle &p)
+{    
+    p.fixed_ = false;
+
     float i = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (M_PI / 2.0)));
     float a = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (2.0 * M_PI)));
 

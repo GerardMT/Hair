@@ -105,7 +105,7 @@
            <string>Euler</string>
           </property>
           <property name="checked">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
          <widget class="QRadioButton" name="radioButton_2">
@@ -133,119 +133,109 @@
           <property name="text">
            <string>Verlet</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </widget>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>130</y>
+           <y>120</y>
            <width>191</width>
-           <height>271</height>
+           <height>251</height>
           </rect>
          </property>
          <property name="title">
-          <string>Particle Initializer</string>
+          <string>Hair System</string>
          </property>
-         <widget class="QRadioButton" name="radioButton_3">
+         <widget class="QGroupBox" name="groupBox_3">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>30</y>
-            <width>122</width>
-            <height>25</height>
+            <width>191</width>
+            <height>141</height>
            </rect>
           </property>
-          <property name="text">
-           <string>Fountain</string>
+          <property name="title">
+           <string>Paint</string>
           </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
+          <widget class="QCheckBox" name="checkBox_3">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>105</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Particles</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="checkBox_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>105</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Path</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
          </widget>
-         <widget class="QRadioButton" name="radioButton_4">
+         <widget class="QGroupBox" name="groupBox_4">
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>60</y>
-            <width>122</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Waterfall</string>
-          </property>
-         </widget>
-         <widget class="QRadioButton" name="radioButton_5">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>90</y>
-            <width>131</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Semi-sphere</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_2">
-          <property name="geometry">
-           <rect>
-            <x>20</x>
-            <y>190</y>
-            <width>66</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Lifetime</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label">
-          <property name="geometry">
-           <rect>
-            <x>20</x>
             <y>120</y>
-            <width>121</width>
-            <height>19</height>
+            <width>191</width>
+            <height>91</height>
            </rect>
           </property>
-          <property name="text">
-           <string># particles</string>
+          <property name="title">
+           <string>Initializer</string>
           </property>
-         </widget>
-         <widget class="QSpinBox" name="spinBox">
-          <property name="geometry">
-           <rect>
-            <x>20</x>
-            <y>140</y>
-            <width>171</width>
-            <height>42</height>
-           </rect>
-          </property>
-          <property name="maximum">
-           <number>100000</number>
-          </property>
-          <property name="value">
-           <number>500</number>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox">
-          <property name="geometry">
-           <rect>
-            <x>20</x>
-            <y>210</y>
-            <width>171</width>
-            <height>42</height>
-           </rect>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>60.000000000000000</double>
-          </property>
+          <widget class="QRadioButton" name="radioButton_3">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>122</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Curly hair</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>122</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Rope</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
          </widget>
         </widget>
        </widget>
@@ -273,6 +263,10 @@
     <slot>uiNParticles(int)</slot>
     <slot>uiLifetime(double)</slot>
     <slot>uiSolverSemiImplicitEuler(bool)</slot>
+    <slot>uiPaintParticles(bool)</slot>
+    <slot>uiPaintPath(bool)</slot>
+    <slot>uiInitializerRope(bool)</slot>
+    <slot>uiInitializerCurly(bool)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -295,56 +289,8 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_3</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>glwidget</receiver>
-   <slot>uiParticleInitializerFountain(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>744</x>
-     <y>172</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>521</x>
-     <y>256</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_4</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>glwidget</receiver>
-   <slot>uiParticleInitializerWatterfall(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>744</x>
-     <y>198</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>528</x>
-     <y>200</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_5</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>glwidget</receiver>
-   <slot>uiParticleInitializerSemiSphere(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>710</x>
-     <y>243</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>533</x>
-     <y>332</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>radioButton_6</sender>
-   <signal>clicked(bool)</signal>
+   <signal>toggled(bool)</signal>
    <receiver>glwidget</receiver>
    <slot>uiSolverVerlet(bool)</slot>
    <hints>
@@ -355,38 +301,6 @@
     <hint type="destinationlabel">
      <x>549</x>
      <y>114</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>glwidget</receiver>
-   <slot>uiNParticles(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>699</x>
-     <y>291</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>541</x>
-     <y>296</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox</sender>
-   <signal>valueChanged(double)</signal>
-   <receiver>glwidget</receiver>
-   <slot>uiLifetime(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>719</x>
-     <y>356</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>568</x>
-     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -403,6 +317,70 @@
     <hint type="destinationlabel">
      <x>554</x>
      <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>glwidget</receiver>
+   <slot>uiPaintParticles(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>680</x>
+     <y>204</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_4</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>glwidget</receiver>
+   <slot>uiPaintPath(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>655</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_4</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>glwidget</receiver>
+   <slot>uiInitializerRope(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>668</x>
+     <y>291</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>519</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_3</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>glwidget</receiver>
+   <slot>uiInitializerCurly(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>700</x>
+     <y>323</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>546</x>
+     <y>385</y>
     </hint>
    </hints>
   </connection>

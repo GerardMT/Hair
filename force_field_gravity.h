@@ -1,5 +1,5 @@
-#ifndef FORCEGRAVITY_H
-#define FORCEGRAVITY_H
+#ifndef FORCEFIELDGRAVITY_H
+#define FORCEFIELDGRAVITY_H
 
 #include "force_field.h"
 
@@ -12,4 +12,4 @@ private:
     glm::vec3 GRAVITY_ = glm::vec3(0.0, -9.8, 0.0);
 };
 
-#endif // FORCEGRAVITY_H
+#endif // FORCEFIELDGRAVITY_H

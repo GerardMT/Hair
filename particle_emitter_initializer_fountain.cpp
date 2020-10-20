@@ -1,16 +1,18 @@
-#include "particle_initializer_fountain.h"
+#include "particle_emitter_initializer_fountain.h"
 
 #include <math.h>
 
-ParticleInitializerFountain::ParticleInitializerFountain(glm::vec3 pos, float speed, float spread)
+ParticleEmitterInitializerFountain::ParticleEmitterInitializerFountain(glm::vec3 pos, float speed, float spread)
 {
     pos_ = pos;
     speed_ = speed;
     spread_ = spread;
 }
 
-void ParticleInitializerFountain::initialize(float dt, Particle &p)
+void ParticleEmitterInitializerFountain::initialize(float dt, Particle &p)
 {
+    p.fixed_ = false;
+
     p.pos_pre_ = pos_;
 
     float i = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (M_PI / 2.0 * spread_)));

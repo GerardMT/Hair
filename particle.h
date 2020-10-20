@@ -14,6 +14,8 @@ public:
     glm::vec3 pos_pre_;
     glm::vec3 vel_;
 
+    bool fixed_;
+
     float mass_;
     glm::vec3 force_;
 

@@ -3,9 +3,6 @@
 #include "collider_plane.h"
 #include "collider_sphere.h"
 #include "collider_triangle.h"
-#include "particle_initializer_fountain.h"
-#include "particle_initializer_semi_sphere.h"
-#include "particle_initializer_waterfall.h"
 #include "solver_euler.h"
 #include "solver_semi_implicit_euler.h"
 #include "solver_verlet.h"
@@ -36,13 +33,13 @@ GLWidget::~GLWidget()
     delete solver_euler_;
     delete solver_semi_implicit_euler_;
 
-    delete particle_initializer_fountain_;
-    delete particle_initializer_waterfall_;
-
-    delete particles_system_;
+    delete particles_system_hair;
 
     delete force_field_gravity_;
     delete force_field_drag_;
+
+    delete particle_hair_initializer_single_;
+    delete particle_hair_initializer_curly_;
 }
 
 
@@ -64,17 +61,16 @@ void GLWidget::initializeGL()
     solver_semi_implicit_euler_ = new SolverSemiImplicitEuler();
     solver_verlet_ = new SolverVerlet();
 
-    particle_initializer_fountain_ = new ParticleInitializerFountain(glm::vec3(0.0, -0.9, 0.0), 5.0, 0.2);
-    particle_initializer_waterfall_ = new ParticleInitializerWaterfall(glm::vec3(0.0, 0.75, 0.0), 0.5, 0.8);
-    particle_initializer_semi_sphere_ = new ParticleInitializerSemiSphere(glm::vec3(0.0, 0.75, 0.0), 3.0, 0.25);
+    particle_hair_initializer_single_ = new ParticleHairInitializerSingle();
+    particle_hair_initializer_curly_ = new ParticleHairInitializerCurly(glm::vec3(0.0, 0.0, 0.0));
 
-    particles_system_ = new ParticleSystem(*solver_euler_, *particle_initializer_fountain_, 500, 60.0);
-    paint_gl_.push_back(particles_system_);
+    particles_system_hair = new ParticleSystemHair(*solver_verlet_, *particle_hair_initializer_single_);
+    paint_gl_.push_back(particles_system_hair);
 
     force_field_gravity_ = new ForceFieldGravity();
-    particles_system_->addForceField(*force_field_gravity_);
+    particles_system_hair->addForceField(*force_field_gravity_);
     force_field_drag_ = new ForceFieldDrag(0.1);
-    particles_system_->addForceField(*force_field_drag_);
+    particles_system_hair->addForceField(*force_field_drag_);
 
     float bouncing = 0.5;
     float friction = 0.2;
@@ -82,40 +78,24 @@ void GLWidget::initializeGL()
     Collider *c;
     c = new ColliderPlane(glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, -1.0, 0.0), bouncing, friction);
     box->addCollider(*c);
-    particles_system_->addCollider(*c);
-    c = new ColliderPlane(glm::vec3(0.0, 1.0, 0.0), glm::vec3(0.0, 1.0, 0.0), bouncing, friction);
-    box->addCollider(*c);
-    particles_system_->addCollider(*c);
+    particles_system_hair->addCollider(*c);
     c = new ColliderPlane(glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, 0.0, -1.0), bouncing, friction);
     box->addCollider(*c);
-    particles_system_->addCollider(*c);
+    particles_system_hair->addCollider(*c);
     c = new ColliderPlane(glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, 0.0, 1.0), bouncing, friction);
     box->addCollider(*c);
-    particles_system_->addCollider(*c);
+    particles_system_hair->addCollider(*c);
     c = new ColliderPlane(glm::vec3(-1.0, 0.0, 0.0), glm::vec3(-1.0, 0.0, 0.0), bouncing, friction);
     box->addCollider(*c);
-    particles_system_->addCollider(*c);
+    particles_system_hair->addCollider(*c);
     c = new ColliderPlane(glm::vec3(1.0, 0.0, 0.0), glm::vec3(1.0, 0.0, 0.0), bouncing, friction);
     box->addCollider(*c);
-    particles_system_->addCollider(*c);
-
-    m = new Mesh();
-    Mesh::ReadFromPly("../model/triangle.ply", *m);
-
-    Object *triangle = new Object(*m, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec4(0.0, 1.0, 0.0, 1.0));
-    objects_.push_back(triangle);
-    paint_gl_.push_back(triangle);
-
-    c = new ColliderTriangle(glm::vec3(m->vertices_[0], m->vertices_[1], m->vertices_[2]),
-                             glm::vec3(m->vertices_[3], m->vertices_[4], m->vertices_[5]),
-                             glm::vec3(m->vertices_[6], m->vertices_[7], m->vertices_[8]), 1.0, 0.0);
-    triangle->addCollider(*c);
-    particles_system_->addCollider(*c);
+    particles_system_hair->addCollider(*c);
 
     m = new Mesh();
     Mesh::ReadFromPly("../model/sphere.ply", *m);
 
-    glm::vec3 sphere_pos = glm::vec3(0.0f, 0.5, 1.0f);
+    glm::vec3 sphere_pos = glm::vec3(0.0f, 0.0, 0.0f);
 
     Object *sphere = new Object(*m, sphere_pos, glm::vec4(0.0, 0.0, 1.0, 1.0));
     objects_.push_back(sphere);
@@ -123,7 +103,7 @@ void GLWidget::initializeGL()
 
     c = new ColliderSphere(sphere_pos, 0.5, 0.8, 0.5);
     sphere->addCollider(*c);
-    particles_system_->addCollider(*c);
+    particles_system_hair->addCollider(*c);
 
     glewInit();
 
@@ -251,7 +231,7 @@ void GLWidget::paintGL() {
 
     camera_.compute_view_projection();
 
-    //dt_ = 0.01666666f; // TODO DEBUG
+    dt_ = 0.01666666f; // TODO DEBUG
 
     //cout << camera_.azimuth_ << " " << camera_.inclination_ << endl;
     //cout << camera_.front_.x << " " << camera_.front_.y << " " << camera_.front_.z << endl;
@@ -266,51 +246,44 @@ void GLWidget::paintGL() {
 void GLWidget::uiSolverEuler(bool v)
 {
     if (v) {
-        particles_system_->solver(*solver_euler_);
+        particles_system_hair->solver(*solver_euler_);
     }
 }
 
 void GLWidget::uiSolverSemiImplicitEuler(bool v)
 {
     if (v) {
-        particles_system_->solver(*solver_semi_implicit_euler_);
+        particles_system_hair->solver(*solver_semi_implicit_euler_);
     }
 }
 
 void GLWidget::uiSolverVerlet(bool v)
 {
     if (v) {
-        particles_system_->solver(*solver_verlet_);
+        particles_system_hair->solver(*solver_verlet_);
     }
 }
 
-void GLWidget::uiParticleInitializerFountain(bool v)
+void GLWidget::uiPaintParticles(bool v)
+{
+    particles_system_hair->paint_particles_ = v;
+}
+
+void GLWidget::uiPaintPath(bool v)
+{
+    particles_system_hair->paint_path_ = v;
+}
+
+void GLWidget::uiInitializerRope(bool v)
 {
     if (v) {
-        particles_system_->particleInitializer(*particle_initializer_fountain_);
+        particles_system_hair->particleInitializer(*particle_hair_initializer_single_);
     }
 }
 
-void GLWidget::uiParticleInitializerWatterfall(bool v)
+void GLWidget::uiInitializerCurly(bool v)
 {
     if (v) {
-        particles_system_->particleInitializer(*particle_initializer_waterfall_);
+        particles_system_hair->particleInitializer(*particle_hair_initializer_curly_);
     }
-}
-
-void GLWidget::uiParticleInitializerSemiSphere(bool v)
-{
-    if (v) {
-        particles_system_->particleInitializer(*particle_initializer_semi_sphere_);
-    }
-}
-
-void GLWidget::uiNParticles(int n)
-{
-    particles_system_->nParticles(n);
-}
-
-void GLWidget::uiLifetime(double t)
-{
-    particles_system_->life_time_ = t;
 }

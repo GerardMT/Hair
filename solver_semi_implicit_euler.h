@@ -1,5 +1,5 @@
-#ifndef SOLVERIMPLICITEULER_H
-#define SOLVERIMPLICITEULER_H
+#ifndef SOLVERSEMIIMPLICITEULER_H
+#define SOLVERSEMIIMPLICITEULER_H
 
 #include "solver.h"
 
@@ -9,4 +9,4 @@ public:
     void solve(float dt, Particle &p) const override;
 };
 
-#endif // SOLVERIMPLICITEULER_H
+#endif // SOLVERSEMIIMPLICITEULER_H

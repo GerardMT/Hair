@@ -1,6 +1,7 @@
-#include "particle_system.h"
+#include "particle_system_emitter.h"
 
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "force_field_gravity.h"
 #include "util.h"
@@ -16,7 +17,7 @@ const float quad_vertices[] = {
   -1.0f,  1.0f, 0.0f
 };
 
-ParticleSystem::ParticleSystem(Solver &s, ParticleInitializer &i, unsigned int n, float life_time)
+ParticleSystemEmitter::ParticleSystemEmitter(Solver &s, ParticleEmitterInitializer &i, unsigned int n, float life_time)
 {
     solver_ = &s;
     particles_.resize(n);
@@ -29,7 +30,15 @@ ParticleSystem::ParticleSystem(Solver &s, ParticleInitializer &i, unsigned int n
     life_time_ = life_time;
 }
 
-void ParticleSystem::nParticles(unsigned int n)
+ParticleSystemEmitter::~ParticleSystemEmitter()
+{
+    glDeleteVertexArrays(1, &vao_);
+    glDeleteBuffers(1, &vbo_);
+    glDeleteBuffers(1, &tbo_);
+    glDeleteBuffers(1, &cdbo_);
+}
+
+void ParticleSystemEmitter::nParticles(unsigned int n)
 {
     unsigned int n_pre = particles_.size();
     particles_.resize(n);
@@ -41,27 +50,27 @@ void ParticleSystem::nParticles(unsigned int n)
     }
 }
 
-void ParticleSystem::addForceField(ForceField &f)
+void ParticleSystemEmitter::addForceField(ForceField &f)
 {
     force_fields_.push_back(&f);
 }
 
-void ParticleSystem::addCollider(Collider &c)
+void ParticleSystemEmitter::addCollider(Collider &c)
 {
     collliders_.push_back(&c);
 }
 
-void ParticleSystem::solver(Solver &s)
+void ParticleSystemEmitter::solver(Solver &s)
 {
     solver_ = &s;
 }
 
-void ParticleSystem::particleInitializer(ParticleInitializer &i)
+void ParticleSystemEmitter::particleInitializer(ParticleEmitterInitializer &i)
 {
     initializer_ = &i;
 }
 
-void ParticleSystem::initialieGL()
+void ParticleSystemEmitter::initialieGL()
 {
     string vert_str;
     readFile("../shader/particle.vert", vert_str);
@@ -99,7 +108,7 @@ void ParticleSystem::initialieGL()
     glBindVertexArray(0);
 }
 
-void ParticleSystem::paintGL(float dt, const Camera &camera)
+void ParticleSystemEmitter::paintGL(float dt, const Camera &camera)
 {
     unsigned int n_alive = 0;
 
