@@ -65,3 +65,8 @@ void ColliderPolygon::correct(float dt, Particle &p)
 {
     collider_plane_.correct(dt, p);
 }
+
+void ColliderPolygon::transform(glm::mat4 m)
+{
+    // TODO
+}

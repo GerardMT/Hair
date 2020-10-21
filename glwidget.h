@@ -67,8 +67,20 @@ private:
     chrono::steady_clock::time_point  time_last_;
 
     bool rotate_ = false;
+
+    int rotate_x_ = 0;
+    int rotate_y_ = 0;
+
     int rotate_last_x_;
     int rotate_last_y_;
+
+    bool move_ = false;
+
+    int move_x_ = 0;
+    int move_y_ = 0;
+
+    int move_last_x_;
+    int move_last_y_;
 
     bool forward_ = false;
     bool backwards_ = false;

@@ -1,9 +1,10 @@
 #ifndef COLLIDER_H
 #define COLLIDER_H
 
+#include "Transform.h"
 #include "particle.h"
 
-class Collider
+class Collider : public Transform
 {
 public:
     virtual ~Collider() {};

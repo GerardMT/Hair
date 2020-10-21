@@ -41,3 +41,8 @@ void ColliderPlane::bouncing(float b)
     bouncing_ = b;
 }
 
+void ColliderPlane::transform(glm::mat4 m)
+{
+    // TODO
+}
+

@@ -12,7 +12,7 @@ ParticleHairInitializerCurly::ParticleHairInitializerCurly(glm::vec3 pos)
 
 void ParticleHairInitializerCurly::initialize(vector<Particle> &particles, vector<Force *> &forces, unsigned int &path_length)
 {
-    const float radius = 0.5;
+    const float radius = 0.55;
     const int a_steps = 15;
     const int i_steps = 5;
     const float length = 0.45;

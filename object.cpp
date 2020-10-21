@@ -38,7 +38,11 @@ void Object::addCollider(Collider &c)
 
 void Object::transform(glm::mat4 m)
 {
-    // TODO
+    for (auto c : colliders_) {
+        c->transform(m);
+    }
+
+    model_ = model_ * m;
 }
 
 void Object::initialieGL()

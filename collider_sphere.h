@@ -3,7 +3,6 @@
 
 #include "collider.h"
 
-
 class ColliderSphere : public Collider
 {
 public:
@@ -12,6 +11,8 @@ public:
     bool collide(Particle &p) override;
 
     void correct(float dt, Particle &p) override;
+
+    void transform(glm::mat4 m) override;
 
     float bouncing_;
     float friction_;

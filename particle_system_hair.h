@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class ParticleSystemHair : public PaintGL
+class ParticleSystemHair : public PaintGL, public Transform
 {
 public:
     ParticleSystemHair(Solver &s, ParticleHairInitializer &i);
@@ -31,6 +31,8 @@ public:
     void initialieGL() override;
 
     void paintGL(float dt, const Camera &camera) override;
+
+    void transform(glm::mat4 m) override;
 
     float life_time_;
 

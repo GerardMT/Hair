@@ -135,12 +135,12 @@ void ParticleSystemHair::paintGL(float dt, const Camera &camera)
 
         if (!p.fixed_) {
             solver_->solve(dt, p);
-        }
 
-        for (auto &c : collliders_) {
-            if(c->collide(p)) {
-                c->correct(dt, p);
-                break;
+            for (auto &c : collliders_) {
+                if(c->collide(p)) {
+                    c->correct(dt, p);
+                    break;
+                }
             }
         }
     }
@@ -214,6 +214,14 @@ void ParticleSystemHair::paintGL(float dt, const Camera &camera)
         glDrawArraysInstanced(GL_TRIANGLES, 0, 6, particles_.size());
 
         glBindVertexArray(0);
+    }
+}
 
+void ParticleSystemHair::transform(glm::mat4 m)
+{
+    for (auto &p : particles_) {
+        if (p.fixed_) {
+            p.pos_ = glm::vec3(m * glm::vec4(p.pos_, 1.0));
+        }
     }
 }

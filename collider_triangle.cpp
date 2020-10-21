@@ -42,3 +42,8 @@ void ColliderTriangle::correct(float dt, Particle &p)
 {
     collider_plane_.correct(dt, p);
 }
+
+void ColliderTriangle::transform(glm::mat4 m)
+{
+    // TODO
+}

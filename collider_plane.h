@@ -18,6 +18,8 @@ public:
 
     void bouncing(float b);
 
+    void transform(glm::mat4 m) override;
+
     glm::vec3 n_;
     glm::vec3 p_;
 

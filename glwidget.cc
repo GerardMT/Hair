@@ -133,6 +133,11 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
     rotate_last_x_ = event->x();
     rotate_last_y_ = event->y();
     break;
+  case Qt::RightButton:
+    move_ = true;
+    move_last_x_ = event->x();
+    move_last_y_ = event->y();
+    break;
   }
 }
 #pragma GCC diagnostic pop
@@ -141,12 +146,18 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
 #pragma GCC diagnostic ignored "-Wswitch"
 void GLWidget::mouseMoveEvent(QMouseEvent *event) {
   if (rotate_) {
-    int x = event->x() - rotate_last_x_;
-    int y = event->y() - rotate_last_y_;
-    camera_.rotate(x, y, dt_);
+    rotate_x_ = event->x() - rotate_last_x_;
+    rotate_y_ = event->y() - rotate_last_y_;
 
     rotate_last_x_ = event->x();
     rotate_last_y_ = event->y();
+  }
+  if (move_) {
+      move_x_ = event->x() - move_last_x_;
+      move_y_ = event->y() - move_last_y_;
+
+      move_last_x_ = event->x();
+      move_last_y_ = event->y();
   }
 }
 #pragma GCC diagnostic pop
@@ -157,6 +168,9 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *event) {
   switch (event->button()) {
   case Qt::LeftButton:
     rotate_ = false;
+    break;
+  case Qt::RightButton:
+    move_ = false;
     break;
   }
 }
@@ -227,6 +241,21 @@ void GLWidget::paintGL() {
     }
     if (right_) {
       camera_.right(dt_);
+    }
+
+    if (rotate_) {
+        camera_.rotate(rotate_x_, rotate_y_, dt_);
+        rotate_x_ = 0;
+        rotate_y_ = 0;
+    }
+
+    if (move_) {
+        glm::vec3 trans = camera_.up_ * static_cast<float>(-move_y_) / static_cast<float>(camera_.height_) + camera_.right_ * static_cast<float>(move_x_) / static_cast<float>(camera_.width_);
+        glm::mat4 m(1.0);
+        particles_system_hair->transform(glm::translate(m, trans));
+
+        move_x_ = 0;
+        move_y_ = 0;
     }
 
     camera_.compute_view_projection();

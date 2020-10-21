@@ -15,6 +15,7 @@ public:
 
     glm::vec3 front_;
     glm::vec3 right_;
+    glm::vec3 up_;
 
     float azimuth_;
     float inclination_;

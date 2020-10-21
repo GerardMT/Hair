@@ -12,6 +12,8 @@ public:
 
     void correct(float dt, Particle &p) override;
 
+    void transform(glm::mat4 m) override;
+
 private:
     ColliderPlane collider_plane_;
 

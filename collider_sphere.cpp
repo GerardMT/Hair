@@ -44,3 +44,8 @@ void ColliderSphere::correct(float dt, Particle &p)
     ColliderPlane collidrPlane(n, i_, bouncing_, friction_);
     collidrPlane.correct(dt, p);
 }
+
+void ColliderSphere::transform(glm::mat4 m)
+{
+    center_ = glm::vec3(m * glm::vec4(center_, 1.0));
+}

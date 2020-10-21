@@ -16,6 +16,7 @@ void Camera::lookAt(glm::vec3 pos)
 {
     front_ = glm::normalize(pos - pos_);
     right_ = glm::normalize(glm::cross(front_, UP_));
+    up_ = glm::cross(right_, front_);
 
     inclination_= glm::degrees(acos(front_.y));
     azimuth_ = glm::degrees(atan(front_.z / front_.x));
@@ -61,6 +62,7 @@ void Camera::rotate(int x, int y, float dt)
     front_.z = sin(glm::radians(inclination_)) * sin(glm::radians(azimuth_));
 
     right_ = glm::normalize(glm::cross(front_, UP_));
+    up_ = glm::cross(right_, front_);
 }
 
 void Camera::viewport() const
