@@ -48,8 +48,7 @@ Once build, simply run:
 	../build/release/hair
 
 ## Screenshots
-<img src="docs/screenshots/rope.gif" alt="Rope" width="45%"> <img src="docs/screenshots/rope.png" alt="Rope" width="45%">
-<img src="docs/screenshots/hair.gif" alt="Hair" width="45%">
+<img src="docs/screenshots/rope.gif" alt="Rope" width="45%"> <img src="docs/screenshots/hair.gif" alt="Hair" width="45%">
 
 ## Other
 Have a look at my other physics based projects:
