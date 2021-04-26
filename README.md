@@ -43,9 +43,10 @@ Compile the code:
 The builds can be found at `build/`.
 
 ## Run
-Once build, simply run:
+Once build, run the project from the build directory:
 
-	../build/release/hair
+	cd ../build/release/
+	./hair
 
 ## Screenshots
 <img src="docs/screenshots/rope.gif" alt="Rope" width="45%"> <img src="docs/screenshots/hair.gif" alt="Hair" width="45%">

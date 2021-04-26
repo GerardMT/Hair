@@ -65,12 +65,12 @@ void ParticleSystemHair::particleInitializer(ParticleHairInitializer &i)
 void ParticleSystemHair::initialieGL()
 {
     string vert_str;
-    readFile("../res/shader/particle.vert", vert_str);
+    readFile("../../res/shader/particle.vert", vert_str);
     program_particles_.addShaderFromSourceCode(QOpenGLShader::Vertex, vert_str.c_str());
     cout << program_particles_.log().toUtf8().constData() << endl;
 
     string frag_str;
-    readFile("../res/shader/particle.frag", frag_str);
+    readFile("../../res/shader/particle.frag", frag_str);
     program_particles_.addShaderFromSourceCode(QOpenGLShader::Fragment, frag_str.c_str());
     cout << program_particles_.log().toUtf8().constData() << endl;
 
@@ -97,11 +97,11 @@ void ParticleSystemHair::initialieGL()
     glEnableVertexAttribArray(2);
     glVertexAttribDivisor(2, 1);
 
-    readFile("../res/shader/path.vert", vert_str);
+    readFile("../../res/shader/path.vert", vert_str);
     program_path_.addShaderFromSourceCode(QOpenGLShader::Vertex, vert_str.c_str());
     cout << program_path_.log().toUtf8().constData() << endl;
 
-    readFile("../res/shader/path.frag", frag_str);
+    readFile("../../res/shader/path.frag", frag_str);
     program_path_.addShaderFromSourceCode(QOpenGLShader::Fragment, frag_str.c_str());
     cout << program_path_.log().toUtf8().constData() << endl;
 
