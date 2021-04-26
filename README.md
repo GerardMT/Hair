@@ -8,7 +8,7 @@ The hair system is based on discrete particles simulation and virtual springs.
 - Move the head/rope anchor points (`mouse right click` + `mouse movement`)
 - Numerical solvers implemented:
 	- Euler
-	- Semi Implicit Euler
+	- Semi-implicit Euler
 	- Verlet
 - Collider types implemented:
 	- Sphere
@@ -20,16 +20,16 @@ The hair system is based on discrete particles simulation and virtual springs.
 - Implemented spring force between particles.
 
 ## Known issues
-- Some particles scape the box, or get into the spehre, on the edges/vertices. This is due to not cheking for a collision again once the particle has been corrected. This can be easly fix at the cost of performance.
+- Some particles scape the box, or get into the sphere, on the edges/vertices. This is due to not checking for a collision again once the particle has been corrected. This can be easy fix at the cost of performance.
 
-## Requirments
+## Requirements
 The software requires the following libraries to be installed:
 - GLEW
 - Eigen
 - QT 5
 
 ## Build
-Clone the repositroy:
+Clone the repository:
 
 	git clone https://github.com/GerardMT/Hair
 	cd Hair
@@ -57,4 +57,4 @@ Have a look at my other physics based projects:
 - [Cloth](https://github.com/GerardMT/Cloth)
 - [Rigid-Bodies](https://github.com/GerardMT/Rigid-Bodies)
 
-If you want to fork this project I recomend cloning [Cloth](https://github.com/GerardMT/Cloth), which includes all the code from [Particles](https://github.com/GerardMT/Particles) and [Hair](https://github.com/GerardMT/Hair), including some improvements.
+If you want to fork this project I recommend cloning [Cloth](https://github.com/GerardMT/Cloth), which includes all the code from [Particles](https://github.com/GerardMT/Particles) and [Hair](https://github.com/GerardMT/Hair), including some improvements.
