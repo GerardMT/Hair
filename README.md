@@ -1,5 +1,5 @@
 # Hair
-A simple CPU driven hair system with an OpenGL renderer. Used Qt 5 as the base framework.
+A simple CPU driven hair system with an OpenGL renderer. Qt 5 used as the base framework.
 
 The hair system is based on discrete particles simulation and virtual springs.
 
